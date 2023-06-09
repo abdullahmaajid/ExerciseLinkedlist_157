@@ -21,6 +21,9 @@ public:
     void traverse();
 };
 void CircularLinkedList::addNode() { //write your answer here
+    int nim;
+   
+
 }
 bool CircularLinkedList::search(int rollno, Node** previous, Node** current) {
     *previous = LAST->next;
@@ -43,6 +46,10 @@ bool CircularLinkedList::listEmpty() {
     return LAST == NULL;
 }
 bool CircularLinkedList::delNode() { //write your answer here }
+
+
+
+
     void CircularLinkedList::traverse() {
         if (listEmpty()) {
             cout << "\nList is empty\n";
