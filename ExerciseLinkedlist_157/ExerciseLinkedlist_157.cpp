@@ -15,47 +15,88 @@ public:
         LAST = NULL;
     }
     void addNode();
-    bool search(int rollno, Node** previous, Node** current);
+    bool search(int rollno, Node* Maajid, Node** Abdullah);
+    void traverse();
     bool listEmpty();
     bool delNode();
-    void traverse();
 };
-void CircularLinkedList::addNode() { //write your answer here
-    int nim;
-    string nm;
-    cout << "\n Enter the rollnumber of the student: ";
-    cin >> nim;
-    cout << "\nEnter the name of the student: ";
-    cin >> nm;
-    Node* newNode = new Node();
-    newNode->rollNumber = nim;
-    newNode->name = nm;
+void CircularLinkedList::addNode() {
 
+    int rollno;
+    string na;
+    cout << "\nEnter the rollnumber of the student: ";
+    cin >> rollno;
+    cout << "\nEnter the name of the student: ";
+    cin >> na;
+    Node* newNode = new Node();  
+    newNode->rollNumber = rollno;
+    newNode->name = na;
 }
+if (LAST == NULL || rollno <= LAST->rollNumber) {
+    if (LAST != NULL && rollno == LAST->rollNumber) {
+        cout << "\n NIM ALREADY EXIST" << endl;
+        return;
+    }
+    newNode->next = LAST;
+    if (LAST != NULL)
+        LAST->next = newNode;
+    newNode->next = NULL;
+    LAST = newNode;
+    return;
+}
+
+Node* Abdullah = LAST;
+Node* Maajid = NULL;
+while (Abdullah->next != NULL && Abdullah->next->rollNumber < rollno)
+{
+    Maajid = Abdullah;
+    Abdullah = Abdullah->next;
+}
+
+if (Abdullah->next != NULL && rollno == Abdullah->next->rollNumber) {
+    cout << "\nDuplicate roll numbers not allowed" << endl;
+    return;
+}
+newNode->next = Abdullah->next;
+if (Abdullah->next != NULL && rollno == Abdullah->next->rollNumber) {
+    Abdullah->next = newNode;
+}
+
+
 bool CircularLinkedList::search(int rollno, Node** previous, Node** current) {
-    *previous = LAST->next;
-    *current = LAST->next;
-    while (*current != LAST) {
-        if (rollno == (*current)->rollNumber) {
+    Node** Maajid, Node** Abdullah) {
+        Node**Maajid = LAST->next;
+        Node**Abdullah = LAST->next;
+        while (*Abdullah != LAST) {
+            if (rollno == (*Abdullah)->rollNumber) {
+                return true;
+            } 
+            **Maajid = *Abdullah;
+            **Abdullah = (*Abdullah)->next;
+        }
+        if (rollno == LAST->rollNumber) {
             return true;
         }
-        *previous = *current;
-        *current = (*current)->next;
+        else {
+            return false;
+        }
     }
-    if (rollno == LAST->rollNumber) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
 bool CircularLinkedList::listEmpty() {
     return LAST == NULL;
 }
-bool CircularLinkedList::delNode() { //write your answer here }
+bool CircularLinkedList::delNode(int rollNo) { 
+    Node*Maajid, *Abdullah;
+    Maajid = Abdulah = NULL;
+    if (search(rollNo, &Maajid, &Abdullah == false)
+        return false;
+    if (Abdullah->next != NULL)
+        Abdullah->next-> = Maajid;
+    else
+        LAST = Abdullah->next;
+    delete Abdullah;
+    return true;
 
-
-
+};
 
     void CircularLinkedList::traverse() {
         if (listEmpty()) {
@@ -65,13 +106,13 @@ bool CircularLinkedList::delNode() { //write your answer here }
             cout << "\nRecords in the list are:\n";
             Node* currentNode = LAST->next;
             while (currentNode != LAST) {
-                cout << currentNode->rollNumber << "
-                    currentNode = currentNode->next;
+                cout << currentNode->rollNumber << " " << currentNode->name << endl;
+                currentNode = currentNode->next;
             }
-            " << currentNode->name << endl;
                 cout << LAST->rollNumber << " " << LAST->name << endl;
         }
     }
+
     int main() {
         CircularLinkedList obj;
         while (true) {
@@ -84,8 +125,10 @@ bool CircularLinkedList::delNode() { //write your answer here }
                 cin >> ch;
                 switch (ch) {
                 case '1': {
+                    obj.addNode();
                 }
                 case '2': {
+                    obj.delNode();
                 }
                 case '3': {
                     obj.traverse();
