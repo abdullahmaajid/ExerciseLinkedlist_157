@@ -27,7 +27,9 @@ void CircularLinkedList::addNode() { //write your answer here
     cin >> nim;
     cout << "\nEnter the name of the student: ";
     cin >> nm;
-
+    Node* newNode = new Node();
+    newNode->rollNumber = nim;
+    newNode->name = nm;
 
 }
 bool CircularLinkedList::search(int rollno, Node** previous, Node** current) {
